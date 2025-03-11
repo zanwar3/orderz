@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheOrderz - Revolutionary Restaurant Management & POS System</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #DD6B24;
+            --primary-dark: #B85518;
+            --primary-light: #F8A87D;
+            --secondary: #2A3990;
+            --accent: #1ECBE1;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --gray: #64748B;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .bg-primary { background-color: var(--primary); }
+        .bg-primary-dark { background-color: var(--primary-dark); }
+        .bg-primary-light { background-color: var(--primary-light); }
+        .bg-secondary { background-color: var(--secondary); }
+        .bg-accent { background-color: var(--accent); }
+        .bg-dark { background-color: var(--dark); }
+        
+        .text-primary { color: var(--primary); }
+        .text-primary-dark { color: var(--primary-dark); }
+        .text-secondary { color: var(--secondary); }
+        .text-accent { color: var(--accent); }
+        .text-dark { color: var(--dark); }
+        
+        .border-primary { border-color: var(--primary); }
+        .border-secondary { border-color: var(--secondary); }
+        .border-accent { border-color: var(--accent); }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(221, 107, 36, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1E2A6C;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(42, 57, 144, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pricing-card {
+            transition: all 0.3s ease;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .pricing-popular {
+            transform: scale(1.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            z-index: 10;
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .nav-link {
+            position: relative;
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .section-heading {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -10px;
+            left: 25%;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .ai-gradient-bg {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            background-color: rgba(221, 107, 36, 0.1);
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shadow-custom {
+            box-shadow: 0 10px 25px rgba(221, 107, 36, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky-header">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="text-primary text-3xl font-bold mr-2">
+                        <img src="images/logo/6.png" alt="TheOrderz Logo" class="w-50 h-10">
+                    </div>
+                    <!-- <h1 class="text-2xl font-bold text-dark">The<span class="text-primary">Orderz</span></h1> -->
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#pricing" class="nav-link">Pricing</a>
+                    <a href="#contact" class="nav-link">Talk to us</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="#login" class="hidden md:inline-block text-gray font-medium hover:text-primary">Login</a>
+                    <a href="#contact" class="btn-primary">Contact Us</a>
+                    <button class="md:hidden text-dark focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-20 md:py-32 bg-light">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-dark leading-tight mb-6">
+                        <span class="text-primary">!تیزی، آسانی، منافع </span>
+                    </h1>
+                    <p class="text-gray text-lg md:text-xl mb-4">
+                        Create your restaurant's website for free & start getting orders!
+                    </p>
+                    <p class="text-dark text-xl md:text-2xl font-semibold mb-8">
+                        Speed, Ease, Profit!
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#contact" class="btn-primary text-center">Contact Us Today</a>
+                    </div>
+                    <div class="mt-12 flex items-center space-x-6">
+                        <div class="flex items-center">
+                            <div class="flex -space-x-2">
+                                <img src="https://randomuser.me/api/portraits/women/12.jpg" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                                <img src="https://randomuser.me/api/portraits/women/45.jpg" class="w-10 h-10 rounded-full border-2 border-white" alt="User">
+                            </div>
+                            <p class="ml-4 text-sm text-gray">Trusted by <span class="font-semibold text-dark">2,000+</span> restaurants</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="relative z-10 floating">
+                        <img src="images/Mobile/1.png" alt="TheOrderz App" class="rounded-2xl shadow-custom">
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary rounded-full opacity-10 -z-10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Showcase Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark section-heading">Mobile App</h2>
+                <p class="text-gray text-lg mt-6 max-w-2xl mx-auto">
+                    Powerful mobile applications for your customers and your business
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <img src="images/Mobile/2.png" alt="TheOrderz Mobile App" class="rounded-xl shadow-lg">
+                <img src="images/Mobile/3.png" alt="TheOrderz Mobile App Features" class="rounded-xl shadow-lg">
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-mobile-alt text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1 text-dark">User-Friendly Interface</h4>
+                            <p class="text-gray">
+                                Intuitive design for seamless customer experience
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-bell text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1 text-dark">Push Notifications</h4>
+                            <p class="text-gray">
+                                Keep customers informed about their orders and special offers
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-map-marker-alt text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1 text-dark">Location Services</h4>
+                            <p class="text-gray">
+                                Find nearby restaurants and track deliveries in real-time
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web App Showcase Section -->
+    <section class="py-16 bg-light">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark section-heading">Web Dashboard</h2>
+                <p class="text-gray text-lg mt-6 max-w-2xl mx-auto">
+                    Powerful management tools for your restaurant business
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-chart-line text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1 text-dark">Real-time Analytics</h4>
+                            <p class="text-gray">
+                                Track sales, customer behavior, and inventory in real-time
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-tasks text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1 text-dark">Order Management</h4>
+                            <p class="text-gray">
+                                Efficiently manage incoming orders and track their status
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-users text-primary"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold mb-1 text-dark">Customer Management</h4>
+                            <p class="text-gray">
+                                Build customer profiles and manage loyalty programs
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <img src="images/Site/1.png" alt="TheOrderz Web Dashboard" class="rounded-xl shadow-lg col-span-2">
+                    <img src="images/Site/2.png" alt="TheOrderz Analytics Dashboard" class="rounded-xl shadow-lg">
+                    <div class="bg-primary text-white p-6 rounded-xl flex items-center justify-center">
+                        <p class="text-xl font-semibold">Speed, Ease, Profit!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zero Commission Section -->
+    <section class="py-16 bg-primary text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">ZERO% COMMISSION</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">
+                Aapki sales aapke paas! Keep more of your hard-earned profits with our commission-free sales model.
+            </p>
+            <a href="#contact" class="bg-white text-primary px-6 py-3 rounded-md font-semibold hover:bg-opacity-90 transition-all">
+                Contact Us
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section (Simplified) -->
+    <section id="features" class="py-20 bg-light">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark section-heading">Key Features</h2>
+                <p class="text-gray text-lg mt-6 max-w-2xl mx-auto">
+                    Everything you need to manage your restaurant efficiently
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-8 shadow-lg">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-dark">Online Ordering Website</h3>
+                    <p class="text-gray">
+                        Clearly display your menu items along with descriptions, images and prices.
+                    </p>
+                    <a href="#" class="text-primary font-medium flex items-center mt-4 hover:underline">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-8 shadow-lg">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-dark">Mobile Application</h3>
+                    <p class="text-gray">
+                        Allow your customers to order from anywhere, at anytime with a smooth checkout process.
+                    </p>
+                    <a href="#" class="text-primary font-medium flex items-center mt-4 hover:underline">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-8 shadow-lg">
+                    <div class="feature-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-dark">Customer Loyalty</h3>
+                    <p class="text-gray">
+                        Reward your loyal customers with exclusive discounts & offers for better user experience.
+                    </p>
+                    <a href="#" class="text-primary font-medium flex items-center mt-4 hover:underline">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white p-8 shadow-lg">
+                    <div class="feature-icon">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-dark">Rider Application</h3>
+                    <p class="text-gray">
+                        Detailed Order Information, including the list of items, quantities and total order cost.
+                    </p>
+                    <a href="#" class="text-primary font-medium flex items-center mt-4 hover:underline">
+                        Learn more <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section (Simplified) -->
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark section-heading">Pricing simplified!</h2>
+                <p class="text-gray text-lg mt-6 max-w-2xl mx-auto">
+                    Choose the plan that works best for your restaurant.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <!-- Free Plan -->
+                <div class="pricing-card bg-white p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Free</h3>
+                    <div class="flex items-end mb-6">
+                        <span class="text-4xl font-bold text-dark">PKR 0</span>
+                        <span class="text-gray ml-2">/mo</span>
+                    </div>
+                    <a href="#contact" class="btn-outline w-full text-center">Contact Us</a>
+                </div>
+                
+                <!-- Basic Plan -->
+                <div class="pricing-card pricing-popular bg-white p-8 shadow-lg border-t-4 border-primary">
+                    <h3 class="text-2xl font-bold text-dark mb-2">Basic</h3>
+                    <div class="flex items-end mb-6">
+                        <span class="text-4xl font-bold text-dark">PKR 4,999</span>
+                        <span class="text-gray ml-2">/mo</span>
+                    </div>
+                    <a href="#contact" class="btn-primary w-full text-center">Contact Us</a>
+                </div>
+                
+                <!-- See All Pricing -->
+                <div class="pricing-card bg-white p-8 shadow-lg flex flex-col justify-center items-center">
+                    <a href="#contact" class="btn-outline">Contact for Details</a>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-gray text-lg">
+                    TheOrderz is a lightweight restaurant ordering system with <span class="font-semibold">website, apps, table ordering, POS and loyalty system.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Restaurant?</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">
+                Join thousands of restaurants already using TheOrderz to streamline operations and boost revenue.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#contact" class="btn-primary bg-white text-primary">Contact Us Today</a>
+                <a href="#contact" class="btn-outline border-white text-white hover:bg-white hover:text-primary">Talk to Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Enhanced) -->
+    <section id="contact" class="py-20 bg-light">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark section-heading">Get in Touch</h2>
+                <p class="text-gray text-lg mt-6 max-w-2xl mx-auto">
+                    Have questions or need assistance? Our team is here to help.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-dark mb-6">Send Us a Message</h3>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="contact-name" class="block text-sm font-medium text-gray mb-1">Your Name</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="contact-email" class="block text-sm font-medium text-gray mb-1">Your Email</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="contact-phone" class="block text-sm font-medium text-gray mb-1">Phone Number</label>
+                            <input type="tel" id="contact-phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="contact-message" class="block text-sm font-medium text-gray mb-1">Your Message</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-dark mb-6">Contact Information</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 text-dark">Phone</h4>
+                                <p class="text-gray">
+                                    <a href="tel:+923041113090" class="hover:text-primary">0304 123 45 67</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 text-dark">Email</h4>
+                                <p class="text-gray">
+                                    <a href="mailto:info@theorderz.com" class="hover:text-primary">info@theorderz.com</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1 text-dark">Office</h4>
+                                <p class="text-gray">
+                                    123 Business Avenue, Suite 456<br>
+                                    Karachi, Pakistan
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-6">
+                            <h4 class="font-semibold mb-4 text-dark">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Simplified) -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="text-primary text-3xl font-bold mr-2">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold">The<span class="text-primary">Orderz</span></h2>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Revolutionizing restaurant management with cutting-edge technology and exceptional service.
+                    </p>
+                    <p class="text-gray-400 font-medium">
+                        Speed, Ease, Profit! | تیزی، آسانی، منافع!
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <div class="grid grid-cols-2">
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                            <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                            <li><a href="#pricing" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        </ul>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Zero Commission</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Get in touch</h3>
+                    <form class="space-y-4">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button type="submit" class="btn-primary w-full">Submit</button>
+                    </form>
+                    <p class="text-gray-400 text-sm mt-4">Share your email and we will be in touch shortly.</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                        &copy; 2024 TheOrderz All Rights Reserved.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a>
+                    </div>
+                </div>
+                <div class="text-center mt-6 text-gray-500 text-sm">
+                    Powered by TheOrderz
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-dark">Welcome!</h3>
+                <button class="text-gray focus:outline-none" onclick="toggleModal('login-modal')">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex space-x-4 mb-6">
+                    <button class="w-1/2 py-2 text-center font-medium border-b-2 border-primary text-primary">Login</button>
+                    <button class="w-1/2 py-2 text-center font-medium text-gray border-b-2 border-transparent" onclick="toggleTabs('signup')">Sign up</button>
+                </div>
+                
+                <div id="login-tab">
+                    <form class="space-y-4">
+                        <div>
+                            <label for="login-email" class="block text-sm font-medium text-gray mb-1">Email</label>
+                            <input type="email" id="login-email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="login-password" class="block text-sm font-medium text-gray mb-1">Password</label>
+                            <input type="password" id="login-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div class="flex justify-end">
+                            <a href="#" class="text-sm text-primary hover:underline">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">Login</button>
+                    </form>
+                </div>
+                
+                <div id="signup-tab" class="hidden">
+                    <form class="space-y-4">
+                        <div>
+                            <label for="signup-name" class="block text-sm font-medium text-gray mb-1">Full Name</label>
+                            <input type="text" id="signup-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="signup-email" class="block text-sm font-medium text-gray mb-1">Email</label>
+                            <input type="email" id="signup-email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div>
+                            <label for="signup-password" class="block text-sm font-medium text-gray mb-1">Password</label>
+                            <input type="password" id="signup-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <button type="submit" class="btn-primary w-full">Sign up</button>
+                    </form>
+                </div>
+                
+                <div class="text-center text-sm text-gray mt-4">
+                    For Sales Please Contact: <a href="tel:+923041113090" class="text-primary">0304 123 45 67</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Website Modal -->
+    <div id="create-website-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-dark">Create Your Website</h3>
+                <button class="text-gray focus:outline-none" onclick="toggleModal('create-website-modal')">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form class="space-y-6">
+                <div>
+                    <label for="restaurant-name" class="block text-sm font-medium text-gray mb-1">Restaurant Name</label>
+                    <input type="text" id="restaurant-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+                <div>
+                    <label for="restaurant-email" class="block text-sm font-medium text-gray mb-1">Email Address</label>
+                    <input type="email" id="restaurant-email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+                <div>
+                    <label for="restaurant-phone" class="block text-sm font-medium text-gray mb-1">Phone Number</label>
+                    <input type="tel" id="restaurant-phone" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+                <div>
+                    <label for="restaurant-location" class="block text-sm font-medium text-gray mb-1">Location</label>
+                    <input type="text" id="restaurant-location" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                </div>
+                <button type="submit" class="btn-primary w-full">Create Free Website</button>
+                <p class="text-center text-sm text-gray">
+                    By creating a website, you agree to our <a href="#" class="text-primary hover:underline">Terms & Conditions</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-dark">Start Your Order</h3>
+                <button class="text-gray focus:outline-none" onclick="toggleModal('order-modal')">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="mb-6">
+                <div class="flex space-x-4 mb-4">
+                    <button class="flex-1 py-2 text-center font-medium rounded-full bg-primary text-white">Delivery</button>
+                    <button class="flex-1 py-2 text-center font-medium rounded-full bg-gray-200 text-gray">Pickup</button>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label for="branch-select" class="block text-sm font-medium text-gray mb-1">Find Your Nearest Branch</label>
+                        <select id="branch-select" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="" disabled selected>Select branch</option>
+                            <option value="branch1">Branch 1</option>
+                            <option value="branch2">Branch 2</option>
+                            <option value="branch3">Branch 3</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn-primary w-full">Start my order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle modals
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+        
+        // Toggle between login and signup tabs
+        function toggleTabs(tab) {
+            if (tab === 'login') {
+                document.getElementById('login-tab').classList.remove('hidden');
+                document.getElementById('signup-tab').classList.add('hidden');
+            } else {
+                document.getElementById('login-tab').classList.add('hidden');
+                document.getElementById('signup-tab').classList.remove('hidden');
+            }
+        }
+        
+        // Add event listeners to buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Login button
+            const loginButtons = document.querySelectorAll('a[href="#login"]');
+            loginButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleModal('login-modal');
+                });
+            });
+            
+            // Create website button
+            const createWebsiteButtons = document.querySelectorAll('a[href="#create-website"]');
+            createWebsiteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleModal('create-website-modal');
+                });
+            });
+            
+            // Order buttons
+            const orderButtons = document.querySelectorAll('a[href="#order"]');
+            orderButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    toggleModal('order-modal');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
